@@ -1,213 +1,202 @@
 # Sistema de gestión de inventario y pedidos anticipados para Ferretería KateRey
 
-**Propuesta de Proyecto Integrador**
-Programa Académico Desconcentrado "Técnico Superior en Informática"
-UMSA · Sede Colquencha
+**Propuesta de Proyecto Integrador**  
+Programa Académico Desconcentrado "Técnico Superior en Informática"  
+UMSA, Sede Colquencha  
 
-Autor: [Jhamil Najum Chino Huarachi]
-Fecha: noviembre de 2026
-
----
-
-## Tipo de proyecto
-
-**Proyecto integrador.** Se resuelve un problema concreto de un cliente real
-construyendo un producto de software funcional, acompañado de la documentación
-de ingeniería que respalda las decisiones tomadas.
-
-No es una monografía: no se estudia el estado del arte de los sistemas de
-inventario, se construye uno. No es una investigación: no se responde una
-pregunta abierta, se resuelve un problema conocido.
+**Autor:** Jhamil Najum Chino Huarachi  
+**Fecha:** 18 de noviembre de 2026  
 
 ---
 
-## El punto de partida
+## Resumen
 
-Este proyecto continúa el trabajo del módulo de Programación Web, en el que se
-construyó el frontend: una página funcional, publicada, con los datos del
-cliente en un archivo JSON.
+La Ferretería KateRey, negocio familiar fundado en 2024 y ubicado sobre la Avenida Panamericana en la Zona San Roque (Distrito 7 de la ciudad de El Alto, sobre la ruta troncal hacia Río Seco y Copacabana), registra sus ventas, pedidos por encargo y existencias en un único cuaderno físico sobre el mostrador. Cada día se pierden entre 5 y 10 clientes porque no es posible confirmar la disponibilidad inmediata de mercadería ni verificar si los encargos con adelanto de Bs 100 están listos en la fecha acordada, exponiendo además toda la información a pérdidas por deterioro físico o lluvias. Para solucionar esta problemática sin incrementar los costos fijos, el presente proyecto integrador desarrolla un sistema web liviano con PHP 8 y base de datos relacional MySQL, adaptando la interfaz responsiva desarrollada en el módulo previo. El sistema permite consultar existencias al instante desde el celular del mostrador, listar pedidos pendientes por fecha de entrega y generar respaldos de seguridad. La solución es técnicamente viable y su costo operativo anual de Bs 600 se amortiza en una sola jornada al recuperar ventas no concretadas.
 
-Para completar el proyecto falta lo siguiente:
+---
 
-| Ya existe | Se construye este módulo |
+## Introducción
+
+El presente documento expone la propuesta formal del proyecto integrador para la carrera Técnico Superior en Informática de la Universidad Mayor de San Andrés, desarrollada en la Sede Universitaria Local Colquencha. El propósito central es fundamentar técnica, operativa y económicamente la solución de software requerida por la Ferretería KateRey, un comercio real que necesita superar la gestión manual en papel para asegurar sus ventas diarias y el resguardo de su información comercial.
+
+Se organiza en seis partes fundamentales: la primera presenta el tipo de proyecto y el perfil del cliente; la segunda expone la formulación del problema mediante causas, efectos y árbol de problemas; la tercera define el objetivo general y los objetivos específicos con criterios verificables; la cuarta sustenta la justificación práctica, técnica y social; la quinta analiza la factibilidad con sus riesgos declarados y delimita los alcances y límites del sistema; y la sexta establece la estructura de desglose del trabajo y el cronograma general de ejecución de las cuatro semanas del módulo.
+
+---
+
+## 1. Tipo de proyecto y cliente
+
+### Tipo de proyecto
+El presente trabajo corresponde a la modalidad de **Proyecto Integrador**. Se enfoca en resolver una necesidad operativa concreta de un cliente real mediante el diseño, construcción, prueba y documentación formal de un producto de software funcional.
+
+No constituye una monografía académica porque no se limita a compilar el estado del arte de los inventarios comerciales, sino que implementa una solución práctica en código. Tampoco corresponde a un proyecto de investigación teórica porque no plantea una hipótesis sobre una pregunta científica abierta, sino que aplica ingeniería de software para solucionar un problema comercial plenamente delimitado.
+
+### Antecedentes y punto de partida
+El proyecto da continuidad técnica al trabajo desarrollado en la asignatura de Programación Web, donde se construyó la interfaz de usuario funcional (frontend responsivo), publicada y probada con un catálogo de productos almacenado en un archivo estático en formato JSON.
+
+El presente módulo completa la solución a través de los siguientes componentes de ingeniería:
+
+| Ya existe (Programación Web) | Se construye en este módulo |
 |---|---|
-| el frontend funcionando y publicado | la propuesta que lo justifica |
-| los datos en un archivo JSON | una base de datos real |
-| "funciona en mi máquina" | requerimientos, pruebas, costos y *deploy* (puesta en producción) |
+| Interfaz visual publicada y funcional | Propuesta formal y especificación de requerimientos |
+| Catálogo de datos en archivo plano JSON | Base de datos relacional persistente y normalizada |
+| Ejecución en entorno local aislado | Control de stock en mostrador, respaldo y despliegue |
+
+### El cliente real
+El cliente del proyecto es la **Ferretería KateRey**, un emprendimiento familiar de dos personas en funcionamiento continuo desde el año 2024. Se dedica al comercio mayorista y minorista de materiales de construcción y artículos de ferretería en general.
+
+**Ubicación comercial:**  
+El establecimiento se encuentra ubicado sobre la **Avenida Panamericana**, en la **Zona San Roque**, perteneciente al **Distrito 7 de la ciudad de El Alto** (Departamento de La Paz), sobre la carretera troncal de alto tránsito comercial que conecta hacia Río Seco y Copacabana.
+
+**Modalidad de trabajo actual:**  
+Toda la operación comercial se concentra en un único cuaderno físico colocado sobre el mostrador. Quien atiende anota las ventas del día, las cotizaciones y, de manera particular, los pedidos anticipados y encargos de material que los clientes confirman mediante un adelanto económico de Bs 100, fijando una fecha de recojo. No existe un inventario kardex en estantes, notas duplicadas ni copias de respaldo de estas anotaciones.
+
+**Fuente de la información:**  
+Entrevista estructurada con el propietario en el propio establecimiento el 16 de noviembre de 2026, con validación de datos en visita de confirmación el 17 de noviembre de 2026.
 
 ---
 
-## El cliente
+## 2. Formulación del problema
 
-**Ferretería KateRey**, Camino a Río Seco, ciudad de La Paz. Negocio familiar de
-dos personas, en funcionamiento desde 2024. Vende material de construcción al
-por mayor y al por menor.
+### Situación problemática en el contexto del cliente
+La dependencia exclusiva del cuaderno físico genera tres dificultades documentadas durante el trabajo de campo:
 
-**Cómo trabaja hoy:** toda la operación se anota en un cuaderno único: las
-ventas, los pedidos anticipados y los encargos de mercadería que el cliente deja
-con un adelanto de Bs 100 para confirmar. No hay copia ni respaldo del cuaderno.
-
-**Fuente de esta información:** entrevista con el propietario, 16 noviembre de
-2026, en el local. Se registró en notas y se validó con él al día siguiente.
-
----
-
-## Formulación del problema
-
-La Ferretería KateRey registra las ventas, los pedidos anticipados y los
-encargos en un cuaderno físico único que se lleva en el mostrador. Quien atiende
-anota el nombre del cliente, el producto, la cantidad, el adelanto recibido y la
-fecha en que el cliente espera retirar el pedido.
-
-Este registro presenta tres dificultades documentadas durante la entrevista de
-16 noviembre de 2026:
-
-**Pérdida de clientes por falta de disponibilidad.** El propietario estima que
-se pierden entre 5 y 10 clientes por día porque, al momento de la venta, no hay
-forma de confirmar si el producto solicitado está disponible o si el pedido
-anticipado ya llegó. El cliente que va con la intención de comprar se retira sin
-comprar cuando no se le puede asegurar la disponibilidad.
-
-**Pérdida de clientes por pedidos anticipados sin seguimiento.** Los clientes
-dejan un adelanto de Bs 100 para confirmar un encargo, pero el seguimiento de
-esos pedidos depende de que alguien revise el cuaderno. Cuando el pedido no se
-revisa a tiempo, el cliente llega y el producto no está listo, y no vuelve.
-
-**Riesgo de pérdida total de la información.** El cuaderno es el único registro
-de ventas, pedidos y adelantos. En ocasiones se extravía dentro del local, y en
-los meses de lluvia se moja por el manejo constante en el mostrador. Si se daña
-o se pierde, no existe ningún respaldo de la información.
+1. **Pérdida de clientes por falta de confirmación de existencias:** El encargado estima la pérdida recurrente de entre 5 y 10 clientes por día. Al momento de la consulta en mostrador, no es posible asegurar con rapidez si el producto solicitado está disponible o si ya fue comprometido para otro encargo. El cliente que acude a comprar se retira sin concretar la venta cuando no se le brinda una respuesta inmediata.
+2. **Pérdida de clientes por pedidos anticipados sin seguimiento oportuno:** Los clientes entregan un adelanto de Bs 100 para asegurar materiales especiales o por volumen, pero el seguimiento de las fechas de entrega depende de que el personal recuerde revisar el cuaderno hoja por hoja. Cuando el encargo no se revisa con anticipación, el comprador asiste en la fecha pactada y encuentra que su mercadería no fue apartada o no llegó de almacén, lo que provoca cancelaciones, devolución del adelanto y pérdida del cliente.
+3. **Riesgo crítico de pérdida total de información:** El cuaderno es el único registro de cobros, ventas y compromisos de mercadería. Durante los meses de lluvia se expone a filtraciones de agua y humedad en el mostrador, sumado al desgaste por la manipulación de cemento y yeso. Su extravío o destrucción anularía todo el historial contable y los anticipos pendientes.
 
 ### Árbol de problemas
-   EFECTOS      Pérdida de entre 5 y 10 clientes por día
-                Pérdida de ingresos por ventas no concretadas
-                Pérdida de adelantos y pedidos sin trazabilidad
-                          ↑
-   PROBLEMA     El registro manual en un cuaderno único no permite
-   CENTRAL      confirmar la disponibilidad de productos ni hacer
-                seguimiento de los pedidos anticipados, y no tiene respaldo
-                          ↑
-   CAUSAS       Las ventas, los pedidos y los adelantos se anotan juntos
-                No hay forma de consultar si un producto está disponible
-                El seguimiento de pedidos depende de revisar el cuaderno
-                El cuaderno es el único registro y no tiene copia
 
-### Problema central
+```text
+                 [ EFECTOS ]
+                 
+  Pérdida de entre 5 y 10 clientes al día en mostrador
+  Pérdida de ingresos comerciales (Bs 500 a Bs 1000 por jornada)
+  Reclamos y desconfianza por pedidos no preparados a tiempo
+  Riesgo de pérdida irrecuperable de datos ante deterioro del cuaderno
+                            ^
+                            |
+                 [ PROBLEMA CENTRAL ]
+                 
+  El registro manual en un cuaderno único de mostrador no permite
+  confirmar la disponibilidad de productos ni hacer seguimiento de
+  los pedidos anticipados con adelanto, y carece de respaldo.
+                            ^
+                            |
+                 [ CAUSAS RAÍZ ]
+                 
+  Registro desordenado de ventas, consultas y encargos en un mismo espacio
+  Inexistencia de un mecanismo de consulta inmediata de stock disponible
+  Control de fechas de entrega dependiente de revisión manual hoja por hoja
+  Inexistencia de copias de seguridad de la información del negocio
+```
 
-> El registro manual en un cuaderno único de la Ferretería KateRey no permite
-> confirmar la disponibilidad de productos ni hacer seguimiento de los pedidos
-> anticipados, y carece de respaldo, lo que ocasiona la pérdida de entre 5 y 10
-> clientes por día y el riesgo de perder toda la información.
+### Declaración del problema central
+El registro manual en un cuaderno único de mostrador de la Ferretería KateRey no permite confirmar la disponibilidad de productos en tiempo real ni hacer seguimiento a los pedidos anticipados con adelanto, careciendo de respaldo de seguridad, lo que ocasiona la pérdida estimada de 5 a 10 clientes por día y expone al negocio al riesgo de perder la totalidad de su información comercial.
 
 ---
 
-## Objetivos
+## 3. Objetivos
 
 ### Objetivo general
-
-Desarrollar un sistema web de gestión de inventario y pedidos anticipados para
-la Ferretería KateRey, que permita consultar la disponibilidad de productos,
-hacer seguimiento de los pedidos con adelanto y conservar el registro con
-respaldo.
+Desarrollar un sistema web de gestión de inventario y pedidos anticipados para la Ferretería KateRey, que permita consultar la disponibilidad de productos, hacer seguimiento a los pedidos con adelanto y conservar el registro comercial con respaldo de seguridad.
 
 ### Objetivos específicos
+Cada objetivo específico se plantea como un resultado de ingeniería evaluable con criterio pasa o falla:
 
-1. Diseñar la base de datos relacional que registre productos, existencias,
-   ventas y pedidos anticipados con su adelanto.
-2. Implementar el registro de ventas y de pedidos anticipados desde el
-   navegador, con validación de los datos obligatorios.
-3. Implementar la consulta de disponibilidad de un producto y la consulta de
-   pedidos anticipados pendientes por fecha de entrega.
-4. Verificar el funcionamiento del sistema mediante una matriz de casos de
-   prueba que cubra el registro, la consulta, el seguimiento y los casos de
-   error.
+1. **Diseñar el esquema de base de datos relacional normalizada** en MySQL para almacenar entidades de productos, existencias, ventas y pedidos anticipados con adelantos. (Pasa si el script DDL ejecuta sin errores y cumple con tercera forma normal).
+2. **Implementar los módulos de registro web para ventas y pedidos anticipados** con validación estricta de campos obligatorios, montos numéricos y fechas de entrega válidas. (Pasa si el formulario rechaza datos incompletos o erróneos y almacena transacciones válidas).
+3. **Implementar la consulta rápida de existencias y el listado de pedidos pendientes** con filtros por nombre de producto y por fecha de entrega, incorporando el marcado de estado a entregado. (Pasa si la búsqueda responde en menos de dos segundos y actualiza el saldo y estado del pedido).
+4. **Implementar la función de respaldo y exportación de la base de datos** para descarga directa de un archivo de volcado SQL desde la interfaz administrativa. (Pasa si el archivo descargado restaura íntegramente las tablas y registros en el motor MySQL).
+5. **Verificar el funcionamiento del sistema mediante una matriz de casos de prueba** que evalúe transacciones normales, límites y casos de error en el 100% de los módulos desarrollados. (Pasa si la totalidad de casos de prueba diseñados arrojan resultado conforme).
 
 ---
 
-## Justificación
+## 4. Justificación
 
-**Práctica.** Las tres dificultades descritas en la formulación del problema
-tienen solución directa con un registro consultable: la disponibilidad se
-consulta en pantalla en lugar de depender de la memoria o del cuaderno, y los
-pedidos con adelanto se listan por fecha de entrega en lugar de revisarse hoja
-por hoja. Cada cliente que hoy se retira sin comprar por no poder confirmar la
-disponibilidad es una venta que el sistema puede recuperar.
+### Justificación práctica
+La disponibilidad de un registro digital consultable en mostrador soluciona de forma directa la fuga de clientes. Quien atiende puede responder sobre existencias en segundos directamente desde la pantalla de su celular, sin abandonar al comprador ni hojear el cuaderno. Asimismo, el listado ordenado de pedidos por fecha de retiro asegura que la mercadería encargada esté lista en el local antes de que el cliente se apersone a recogerla.
 
-**Técnica.** Se elige una aplicación web y no una de escritorio porque el
-negocio ya tiene el frontend construido y publicado, y porque debe consultarse
-desde el celular del mostrador sin instalar nada. Se usa PHP y MySQL porque
-funcionan sobre hosting compartido de bajo costo, que es lo accesible para un
-negocio de este tamaño.
+### Justificación técnica
+Se adopta una aplicación web responsiva porque aprovecha la interfaz ya aprobada del módulo anterior y evita la instalación o configuración de software en los teléfonos de los operadores. La combinación de PHP y MySQL representa una solución probada, de consumo mínimo de recursos y compatible con servicios de alojamiento compartido económicos, facilitando el mantenimiento y la portabilidad técnica.
 
-**Social.** El registro con respaldo elimina el riesgo de perder toda la
-información si el cuaderno se moja o se extravía, situación que ya ocurrió en
-los meses de lluvia y que hoy no tiene ninguna copia de seguridad.
+### Justificación social y económica
+La sistematización protege los activos informativos de un emprendimiento familiar alteño, permitiéndole competir en igualdad de condiciones con ferreterías de mayor tamaño comercial en la zona de San Roque y Río Seco. Se garantiza un trato formal y confiable a los vecinos que dejan dinero de adelanto, asegurando el cumplimiento de sus compromisos comerciales.
 
 ---
 
-## Factibilidad
+## 5. Factibilidad, alcances y límites
 
-**Técnica.** El sistema requiere un servidor con PHP 8 y MySQL, que es la
-configuración estándar de cualquier hosting compartido. El desarrollo se hace
-con XAMPP en local, que funciona sin conexión. El frontend ya está construido y
-publicado. No se requiere ninguna tecnología que el equipo no haya usado antes.
+### Factibilidad
 
-**Operativa.** El sistema lo van a usar el propietario y su acompañante, ambos
-con teléfono con navegador. La operación diaria se reduce a registrar una venta,
-registrar un pedido anticipado con su adelanto y consultar la disponibilidad de
-un producto, acciones que se resuelven en una pantalla cada una.
+#### Factibilidad técnica
+El sistema opera sobre la pila de software estándar Apache, PHP y MySQL/MariaDB bajo XAMPP en fase de desarrollo y sobre cualquier servidor web comercial compartido en producción.
+* **Riesgo técnico declarado:** Caídas temporales del servicio de Internet en el sector del local comercial durante las horas de atención.
+* **Mitigación:** Capacidad de ejecución contingente sobre red local Wi-Fi en el mostrador mediante un servidor local portátil si la conectividad externa se interrumpe.
 
-*Riesgo identificado:* el registro depende de que la venta o el pedido se cargue
-en el momento. Si se sigue anotando en el cuaderno "para pasarlo después", el
-sistema no resuelve nada. Se mitiga dejando el registro accesible desde el
-celular del mostrador, sin instalar nada.
+#### Factibilidad operativa
+El sistema será utilizado por el propietario y su colaborador, quienes operan teléfonos inteligentes en su vida cotidiana. Las funciones clave se resuelven en interfaces intuitivas de una sola vista.
+* **Riesgo operativo declarado:** Resistencia al cambio o persistencia en el uso del cuaderno en horas de alta concurrencia de clientes.
+* **Mitigación:** Formulario de registro ultra simplificado que demanda un máximo de cuatro datos esenciales, permitiendo asentar una venta o un encargo en menos de treinta segundos desde el teléfono.
 
-**Económica.** El desarrollo se realiza como parte del módulo, sin costo para el
-cliente. La operación anual estimada es:
+#### Factibilidad económica
+El desarrollo del software no implica costo de mano de obra por desarrollarse en el marco de la formación académica. Los costos reales de operación anual corresponden a:
 
-| Concepto | Costo anual (Bs) |
+| Concepto de servicio | Costo anual estimado (Bs) |
 |---|---|
-| Hosting compartido con PHP y MySQL | 350 |
-| Dominio .bo | 250 |
-| **Total** | **600** |
+| Alojamiento web compartido (PHP y MySQL) | 350 |
+| Dominio territorial boliviano (.bo) | 250 |
+| **Costo total de operación anual** | **600** |
 
-Frente a eso, la pérdida estimada de entre 5 y 10 clientes por día, a un ticket
-promedio de Bs 100 según el propietario, representa entre Bs 500 y Bs 1.000 en
-un solo día. El costo anual de operación se recupera con menos de un día de
-ventas no perdidas.
+* **Riesgo económico declarado:** Que el propietario considere que el costo anual de Bs 600 es prescindible frente al costo mínimo de un cuaderno de papel.
+* **Mitigación:** Análisis de retorno de inversión: con un ticket promedio de venta de Bs 100, la pérdida estimada de 5 a 10 clientes al día significa entre Bs 500 y Bs 1000 perdidos cada jornada. La recuperación de las ventas de un solo día cubre el costo de operación de todo un año.
 
 ---
 
-## Alcances y límites
+### Alcances y límites
 
-### Alcance
+#### Alcances (Lo que sí incluye el sistema)
+1. Registro y actualización de productos con código, nombre, categoría, precio y existencia disponible.
+2. Registro de ventas directas con deducción inmediata del stock disponible.
+3. Registro de pedidos anticipados con nombre del cliente, producto, cantidad, adelanto recibido (Bs 100 referencial), saldo por cobrar y fecha comprometida de entrega.
+4. Consulta rápida de existencias mediante buscador interactivo de productos.
+5. Listado de pedidos anticipados pendientes ordenados cronológicamente por fecha de entrega.
+6. Módulo administrativo para exportar y descargar el respaldo de la base de datos en formato SQL.
 
-El sistema entregado incluye:
-
-- registro de productos con su existencia disponible
-- registro de una venta con cliente, producto y cantidad
-- registro de un pedido anticipado con adelanto y fecha de entrega
-- consulta de disponibilidad de un producto
-- consulta de pedidos anticipados pendientes filtrados por fecha de entrega
-- marcado de un pedido anticipado como entregado
-- respaldo del registro mediante exportación de la base de datos
-
-### Límites
-
-El sistema **no** incluye, y en cada caso se indica por qué:
-
-- **Cobros ni facturación.** La ferretería factura con talonario manual, y la
-  facturación electrónica en Bolivia exige integración con el sistema de
-  Impuestos Nacionales, que excede el alcance de un módulo de tres semanas.
-- **Gestión de compras a proveedores ni cuentas por pagar.** El problema
-  formulado es la disponibilidad y el seguimiento de pedidos, no la gestión de
-  compras. Incluirlo duplicaría el tamaño del proyecto sin atacar el problema
-  central.
-- **Notificaciones automáticas al cliente.** Requiere integración con un
-  servicio de mensajería de pago. Queda planteado como recomendación.
-- **Múltiples sucursales.** El negocio tiene un solo local. El diseño de la
-  base de datos no impide agregarlo después, pero no se implementa.
+#### Límites explícitos (Lo que no incluye el sistema y su justificación)
+1. **Facturación electrónica con el SIN:** El negocio pertenece al régimen tributario simplificado y utiliza talonario de notas manuales. La integración con los servicios web del Servicio de Impuestos Nacionales requiere certificados digitales que exceden los tiempos del presente módulo.
+2. **Gestión de compras a proveedores y cuentas por pagar:** El problema central del negocio radica en la atención y disponibilidad en mostrador. Incluir compras aumentaría la complejidad del sistema sin atacar la causa principal de pérdida de ventas.
+3. **Notificaciones automáticas por mensajería (SMS o WhatsApp Business API):** Requiere suscripciones mensuales pagadas en moneda extranjera que el cliente no requiere en esta fase.
+4. **Múltiples sucursales:** El comercio opera en un único establecimiento sobre la Avenida Panamericana, por lo que no se requiere sincronización entre sucursales distribuidas.
 
 ---
 
-*(Este documento continúa el Día 5 con el cronograma, el resumen y la introducción.)*
+## 6. Estructura de desglose del trabajo y cronograma
+
+### Estructura de desglose del trabajo (WBS)
+La planificación del trabajo se organiza mediante paquetes de productos identificados con sustantivos:
+
+```text
+1. Propuesta de proyecto y diagnóstico
+   1.1 Diagnóstico de campo y levantamiento de requerimientos
+   1.2 Documento de propuesta formal de proyecto
+2. Diseño y arquitectura de software
+   2.1 Modelo entidad-relación y base de datos relacional
+   2.2 Especificación de requerimientos y casos de uso
+3. Construcción del sistema web
+   3.1 Módulo de gestión de inventario y existencias
+   3.2 Módulo de ventas y pedidos anticipados con adelanto
+   3.3 Módulo de respaldo y utilidades administrativas
+4. Pruebas, despliegue y entrega final
+   4.1 Matriz de pruebas funcionales y validación
+   4.2 Despliegue en servidor de producción y capacitación
+   4.3 Documento final de ingeniería y defensa
+```
+
+### Cronograma de ejecución
+
+| Semana | Paquetes de trabajo (WBS) | Entregable verificable |
+|---|---|---|
+| **Semana 1 (Días 1 a 5)** | 1.1 Diagnóstico en local y 1.2 Propuesta formal | Propuesta aprobada (Laboratorio 1) |
+| **Semana 2 (Días 6 a 10)** | 2.1 Modelo relacional y 2.2 Requerimientos | Marco técnico y base de datos (Laboratorio 2) |
+| **Semana 3 (Días 11 a 15)** | 3.1 Inventario, 3.2 Pedidos y 3.3 Respaldo | Sistema web funcional con base de datos (Laboratorio 3) |
+| **Semana 4 (Días 16 a 20)** | 4.1 Pruebas, 4.2 Despliegue y 4.3 Documento final | Sistema en producción, documento final y defensa |
