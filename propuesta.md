@@ -11,7 +11,7 @@ UMSA, Sede Colquencha
 
 ## Resumen
 
-La Ferretería KateRey, negocio familiar fundado en 2024 y ubicado sobre la Avenida Panamericana en la Zona San Roque (Distrito 7 de la ciudad de El Alto, sobre la ruta troncal hacia Río Seco y Copacabana), registra sus ventas, pedidos por encargo y existencias en un único cuaderno físico sobre el mostrador. Cada día se pierden entre 5 y 10 clientes porque no es posible confirmar la disponibilidad inmediata de mercadería ni verificar si los encargos con adelanto de Bs 100 están listos en la fecha acordada, exponiendo además toda la información a pérdidas por deterioro físico o lluvias. Para solucionar esta problemática sin incrementar los costos fijos, el presente proyecto integrador desarrolla un sistema web liviano con PHP 8 y base de datos relacional MySQL, adaptando la interfaz responsiva desarrollada en el módulo previo. El sistema permite consultar existencias al instante desde el celular del mostrador, listar pedidos pendientes por fecha de entrega y generar respaldos de seguridad. La solución es técnicamente viable y su costo operativo anual de Bs 600 se amortiza en una sola jornada al recuperar ventas no concretadas.
+La Ferretería KateRey, negocio familiar fundado en 2024 y ubicado sobre la Avenida Panamericana en la Zona San Roque (Distrito 7 de la ciudad de El Alto, sobre la ruta troncal hacia Río Seco y Copacabana), registra sus ventas, pedidos por encargo y existencias en un único cuaderno físico sobre el mostrador. Cada día se pierden entre 5 y 10 clientes porque no es posible confirmar la disponibilidad inmediata de mercadería ni verificar si los encargos con adelanto de Bs 100 están listos en la fecha acordada, exponiendo además toda la información a pérdidas por deterioro físico o lluvias. Para solucionar esta problemática sin incrementar los costos fijos, el presente proyecto integrador desarrolla un sistema web liviano con PHP 8 y base de datos relacional MySQL, adaptando la interfaz responsiva desarrollada en el módulo previo. El sistema permite consultar existencias al instante desde el celular del mostrador, listar pedidos pendientes por fecha de entrega y generar respaldos de seguridad. La solución es técnicamente viable y su inversión inicial junto al costo operativo anual se amortizan en apenas dos jornadas al recuperar ventas no concretadas.
 
 ---
 
@@ -139,16 +139,18 @@ El sistema será utilizado por el propietario y su colaborador, quienes operan t
 * **Mitigación:** Formulario de registro ultra simplificado que demanda un máximo de cuatro datos esenciales, permitiendo asentar una venta o un encargo en menos de treinta segundos desde el teléfono.
 
 #### Factibilidad económica
-El desarrollo del software no implica costo de mano de obra por desarrollarse en el marco de la formación académica. Los costos reales de operación anual corresponden a:
+El desarrollo del software no implica costo de mano de obra por desarrollarse en el marco de la formación académica. Los costos reales del proyecto diferencian la inversión única en hardware de contingencia y los costos de operación anual:
 
-| Concepto de servicio | Costo anual estimado (Bs) |
-|---|---|
-| Alojamiento web compartido (PHP y MySQL) | 350 |
-| Dominio territorial boliviano (.bo) | 250 |
-| **Costo total de operación anual** | **600** |
+| Concepto | Tipo de costo | Costo estimado (Bs) |
+|---|---|:---:|
+| Hardware para servidor local contingente (Mini PC / equipo local Wi-Fi) | Inversión inicial (pago único) | 450 |
+| Alojamiento web compartido (PHP 8 y MySQL) | Operación anual recurrente | 350 |
+| Dominio territorial boliviano (.bo) | Operación anual recurrente | 250 |
+| **Total Inversión Inicial y Primer Año** | | **1.050** |
+| *(Costo operativo anual a partir del 2.° año)* | *(Renovación web y dominio)* | *(600)* |
 
-* **Riesgo económico declarado:** Que el propietario considere que el costo anual de Bs 600 es prescindible frente al costo mínimo de un cuaderno de papel.
-* **Mitigación:** Análisis de retorno de inversión: con un ticket promedio de venta de Bs 100, la pérdida estimada de 5 a 10 clientes al día significa entre Bs 500 y Bs 1000 perdidos cada jornada. La recuperación de las ventas de un solo día cubre el costo de operación de todo un año.
+* **Riesgo económico declarado:** Que el propietario considere que la inversión en hardware contingente y el costo operativo anual de Bs 600 son prescindibles frente al costo mínimo de un cuaderno de papel.
+* **Mitigación:** Análisis de retorno de inversión: con un ticket promedio de venta de Bs 100, la pérdida estimada de 5 a 10 clientes al día significa entre Bs 500 y Bs 1.000 perdidos cada jornada. La recuperación de las ventas no concretadas en apenas dos jornadas de atención amortiza por completo tanto el servidor local contingente como el servicio web del primer año.
 
 ---
 
@@ -179,9 +181,10 @@ La planificación del trabajo se organiza mediante paquetes de productos identif
 1. Propuesta de proyecto y diagnóstico
    1.1 Diagnóstico de campo y levantamiento de requerimientos
    1.2 Documento de propuesta formal de proyecto
-2. Diseño y arquitectura de software
-   2.1 Modelo entidad-relación y base de datos relacional
-   2.2 Especificación de requerimientos y casos de uso
+2. Marco teórico y especificación de requerimientos
+   2.1 Fundamentación teórica y aplicación de instrumentos de recolección
+   2.2 Especificación formal de requerimientos de software (IEEE 830)
+   2.3 Modelo conceptual y lógico de base de datos relacional
 3. Construcción del sistema web
    3.1 Módulo de gestión de inventario y existencias
    3.2 Módulo de ventas y pedidos anticipados con adelanto
@@ -194,9 +197,9 @@ La planificación del trabajo se organiza mediante paquetes de productos identif
 
 ### Cronograma de ejecución
 
-| Semana | Paquetes de trabajo (WBS) | Entregable verificable |
+| Periodo y fecha | Paquetes de trabajo (WBS) | Entregable verificable formal |
 |---|---|---|
-| **Semana 1 (Días 1 a 5)** | 1.1 Diagnóstico en local y 1.2 Propuesta formal | Propuesta aprobada (Laboratorio 1) |
-| **Semana 2 (Días 6 a 10)** | 2.1 Modelo relacional y 2.2 Requerimientos | Marco técnico y base de datos (Laboratorio 2) |
-| **Semana 3 (Días 11 a 15)** | 3.1 Inventario, 3.2 Pedidos y 3.3 Respaldo | Sistema web funcional con base de datos (Laboratorio 3) |
-| **Semana 4 (Días 16 a 20)** | 4.1 Pruebas, 4.2 Despliegue y 4.3 Documento final | Sistema en producción, documento final y defensa |
+| **Semana 1** (16 al 20 de noviembre de 2026) | 1.1 Diagnóstico en local y 1.2 Propuesta formal | Documento de propuesta formal de proyecto aprobado |
+| **Semana 2** (23 al 27 de noviembre de 2026) | 2.1 Marco teórico y 2.2 Requerimientos IEEE 830 | Marco teórico, estado del arte y especificación formal de requerimientos |
+| **Semana 3** (30 de noviembre al 04 de diciembre de 2026) | 3.1 Inventario, 3.2 Pedidos y 3.3 Respaldo | Prototipo del sistema web funcional con base de datos relacional |
+| **Semana 4** (07 al 11 de diciembre de 2026) | 4.1 Pruebas, 4.2 Despliegue y 4.3 Documento final | Sistema web desplegado en producción, informe final y defensa académica |
